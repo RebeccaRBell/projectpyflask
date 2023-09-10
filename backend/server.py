@@ -5,13 +5,31 @@ app = Flask(__name__)
 
 def get_db_connection():
     conn = psycopg2.connect(host='localhost',
-                            database='projectpyflask'
-                            )
+                            database='projectpyflask')
     return conn
+
+
+@app.route('/api')
+def api():
+    return {
+		"test": 1,
+		"test2": "testing"
+	}
 
 
 @app.route('/')
 def index():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM users FETCH FIRST 1 ROWS ONLY;')
+    users = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('login.html')
+
+
+@app.route('/home')
+def home():
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('SELECT * FROM users;')
@@ -20,27 +38,6 @@ def index():
     conn.close()
     return render_template('index.html', users=users)
 
-
-# @app.route('/create', methods=('GET', 'POST'))
-# def create():
-#     if request.method == 'POST':
-#         title = request.form['title']
-#         first_name = request.form['first_name']
-#         last_name = request.form['last_name']
-#         active = bool(request.form['active'])
-        
-#         conn = get_db_connection()
-#         cur = conn.cursor()
-#         cur.exectue('INSERT INTO users (title, first_name, last_name, active)'
-#                     'VALUES (%s, %s, %s, %s)',
-#                     (title, first_name, last_name, active))
-#         conn.commit()
-#         cur.close()
-#         conn.close()
-# 		return redirect(url_for('index'))
-        
-
-# 	return render_template('create.html')
 
 
 @app.route('/create/', methods=('GET', 'POST'))
@@ -65,6 +62,11 @@ def create():
         return redirect(url_for('index'))
 
     return render_template('create.html')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template('404.html'), 404
  
 if __name__ == '__main__':
     app.run(debug=True)

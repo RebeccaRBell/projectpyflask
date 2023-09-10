@@ -5,40 +5,48 @@ conn = psycopg2.connect(
         host="localhost",
         database="projectpyflask"
         )
-        # user=os.environ['DB_USERNAME'],
-        # password=os.environ['DB_PASSWORD'])
 
-# Open a cursor to perform database operations
 cur = conn.cursor()
 
-# Execute a command: this creates a new table
+
 cur.execute('DROP TABLE IF EXISTS users;')
 cur.execute('CREATE TABLE users (id serial PRIMARY KEY,'
                                  'title varchar (10) NOT NULL,'
                                  'first_name varchar (50) NOT NULL,'
                                  'last_name varchar(50) NOT NULL,'
+                                 'password varchar(20) NOT NULL,'
                                  'active boolean NOT NULL,'
                                  'date_created date DEFAULT CURRENT_TIMESTAMP);'
                                  )
 
-# Insert data into the table
 
-cur.execute('INSERT INTO users (title, first_name, last_name, active)'
-            'VALUES (%s, %s, %s, %s)',
+cur.execute('INSERT INTO users (title, first_name, last_name, password, active)'
+            'VALUES (%s, %s, %s, %s, %s)',
+            ('X',
+             'Admin',
+             'User',
+             'P4ssW0rd',
+             False)
+            )
+
+cur.execute('INSERT INTO users (title, first_name, last_name, password, active)'
+            'VALUES (%s, %s, %s, %s, %s)',
             ('Mr',
              'Lewis',
              'Halstead',
+             'Password123',
              True)
             )
 
-
-cur.execute('INSERT INTO users (title, first_name, last_name, active)'
-            'VALUES (%s, %s, %s, %s)',
+cur.execute('INSERT INTO users (title, first_name, last_name, password, active)'
+            'VALUES (%s, %s, %s, %s, %s)',
             ('Ms',
              'Becca',
              'Bell',
+             'Password321',
              False)
             )
+
 
 conn.commit()
 
