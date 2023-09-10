@@ -9,10 +9,8 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 
-# Drop the table if it exists
 cur.execute('DROP TABLE IF EXISTS users;')
 
-# Create the users table
 cur.execute('CREATE TABLE users (id serial PRIMARY KEY,'
             'title varchar(10) NOT NULL,'
             'first_name varchar(50) NOT NULL,'
@@ -24,7 +22,6 @@ cur.execute('CREATE TABLE users (id serial PRIMARY KEY,'
             'date_created date DEFAULT CURRENT_TIMESTAMP);'
             )
 
-# Create the generate_username function
 cur.execute('''
     CREATE OR REPLACE FUNCTION generate_username(first_name VARCHAR, last_name VARCHAR) RETURNS VARCHAR AS $$
     DECLARE
@@ -45,7 +42,6 @@ cur.execute('''
     $$ LANGUAGE plpgsql;
 ''')
 
-# Create the generate_username_trigger trigger
 cur.execute('''
     CREATE OR REPLACE FUNCTION generate_username_trigger() RETURNS TRIGGER AS $$
     BEGIN
