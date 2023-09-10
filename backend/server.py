@@ -8,7 +8,6 @@ app = Flask(__name__)
  
 @app.route('/data')
 def get_time():
- 
     return {
         'Name':"geek",
         "Age":"22",
