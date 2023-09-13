@@ -5,8 +5,7 @@
     {% for user in users %}
         <div class='user'>
             <h3>#{{ user[0] }} - {{ user[1] }} {{ user[2], user[4]}}</h3>
-            <p class='review'>Active: {{ user[5] }}</p>
-            <p>Added {{ user[7] }}</p>
+            <p class='review'>Active: {{ user[7] }}</p>
         </div>
     {% endfor %}
 {% endblock %}
