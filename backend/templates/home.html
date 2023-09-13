@@ -4,7 +4,9 @@
     <h1>{% block title %} Users {% endblock %}</h1>
     {% for user in users %}
         <div class='user'>
-            <h3>#{{ user[0] }} - {{ user[1] }} {{ user[2], user[4]}}</h3>
+            <a href='/edit/{{ user[0] }}'>
+                <h3>#{{ user[0] }} - {{ user[1] }} {{ user[2], user[4]}}</h3>
+            </a>
             <p class='review'>Active: {{ user[7] }}</p>
         </div>
     {% endfor %}
