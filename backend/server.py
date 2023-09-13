@@ -36,8 +36,7 @@ def home():
     users = cur.fetchall()
     cur.close()
     conn.close()
-    return render_template('index.html', users=users)
-
+    return render_template('home.html', users=users)
 
 
 @app.route('/create/', methods=('GET', 'POST'))
@@ -59,9 +58,34 @@ def create():
         conn.commit()
         cur.close()
         conn.close()
-        return redirect(url_for('index'))
+        return redirect(url_for('create'))
 
     return render_template('create.html')
+
+
+@app.route('/edit/<int:id>/', methods=('GET', 'POST'))
+def edit(id):
+    if request.method == 'POST':
+        title = request.form['title']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        try:
+            active = bool(request.form['active'])
+        except:
+            active = False
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('UPDATE users SET title=%s, first_name=%s, last_name=%s, active=%s WHERE id=%s',
+                    (title, first_name, last_name, active, id))
+        users=cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('edit', id=id))
+        
+    return render_template('edit.html', id=id, user=users)
+
 
 
 @app.errorhandler(404)
@@ -70,3 +94,5 @@ def page_not_found(e):
  
 if __name__ == '__main__':
     app.run(debug=True)
+
+
