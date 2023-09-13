@@ -17,7 +17,7 @@ cur.execute('CREATE TABLE users (id serial PRIMARY KEY,'
             'email varchar(100),'
             'last_name varchar(50) NOT NULL,'
             'username varchar(50),'
-            'password varchar(20) NOT NULL,'
+            'password varchar(20),'
             'active boolean NOT NULL,'
             'date_created date DEFAULT CURRENT_TIMESTAMP);'
             )

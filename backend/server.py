@@ -73,19 +73,22 @@ def edit(id):
             active = bool(request.form['active'])
         except:
             active = False
-
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('UPDATE users SET title=%s, first_name=%s, last_name=%s, active=%s WHERE id=%s',
                     (title, first_name, last_name, active, id))
-        users=cur.fetchall()
         conn.commit()
         cur.close()
         conn.close()
-        return redirect(url_for('edit', id=id))
-        
-    return render_template('edit.html', id=id, user=users)
-
+        return redirect(url_for('home'))
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM users;')
+    users = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('edit.html', user=users[id], id=id)
 
 
 @app.errorhandler(404)
