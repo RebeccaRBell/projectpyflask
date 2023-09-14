@@ -30,10 +30,53 @@ cur.execute('INSERT INTO plants (plant_id, common_name, scientific_name, family,
              'Asparagaceae',
              "Snake Plant, also known as the Mother-in-law's Tongue, is a popular and hardy indoor plant. It is known for its striking upright leaves with green and yellow stripes.",
              'Snake Plants are low-maintenance and thrive in indirect light. Water sparingly and allow the soil to dry between waterings.'
-             )
-            
-            
-            )
+             ))
+
+cur.execute('INSERT INTO plants (plant_id, common_name, scientific_name, family, description, care_instructions)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('1',
+             'Snake Plant',
+             'Sansevieria Trifasciata',
+             'Asparagaceae',
+             "Snake Plant, also known as the Mother-in-law's Tongue, is a popular and hardy indoor plant. It is known for its striking upright leaves with green and yellow stripes.",
+             'Snake Plants are low-maintenance and thrive in indirect light. Water sparingly and allow the soil to dry between waterings.'
+             ))
+cur.execute('INSERT INTO plants (plant_id, common_name, scientific_name, family, description, care_instructions)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('1',
+             'Snake Plant',
+             'Sansevieria Trifasciata',
+             'Asparagaceae',
+             "Snake Plant, also known as the Mother-in-law's Tongue, is a popular and hardy indoor plant. It is known for its striking upright leaves with green and yellow stripes.",
+             'Snake Plants are low-maintenance and thrive in indirect light. Water sparingly and allow the soil to dry between waterings.'
+             ))
+cur.execute('INSERT INTO plants (plant_id, common_name, scientific_name, family, description, care_instructions)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('1',
+             'Snake Plant',
+             'Sansevieria Trifasciata',
+             'Asparagaceae',
+             "Snake Plant, also known as the Mother-in-law's Tongue, is a popular and hardy indoor plant. It is known for its striking upright leaves with green and yellow stripes.",
+             'Snake Plants are low-maintenance and thrive in indirect light. Water sparingly and allow the soil to dry between waterings.'
+             ))
+cur.execute('INSERT INTO plants (plant_id, common_name, scientific_name, family, description, care_instructions)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('1',
+             'Snake Plant',
+             'Sansevieria Trifasciata',
+             'Asparagaceae',
+             "Snake Plant, also known as the Mother-in-law's Tongue, is a popular and hardy indoor plant. It is known for its striking upright leaves with green and yellow stripes.",
+             'Snake Plants are low-maintenance and thrive in indirect light. Water sparingly and allow the soil to dry between waterings.'
+             ))
+cur.execute('INSERT INTO plants (plant_id, common_name, scientific_name, family, description, care_instructions)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('1',
+             'Snake Plant',
+             'Sansevieria Trifasciata',
+             'Asparagaceae',
+             "Snake Plant, also known as the Mother-in-law's Tongue, is a popular and hardy indoor plant. It is known for its striking upright leaves with green and yellow stripes.",
+             'Snake Plants are low-maintenance and thrive in indirect light. Water sparingly and allow the soil to dry between waterings.'
+             ))
 
 conn.commit()
 
