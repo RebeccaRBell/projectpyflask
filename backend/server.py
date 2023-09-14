@@ -1,5 +1,6 @@
 import psycopg2
-from flask import Flask, render_template, request, url_for, redirect
+from psycopg2 import extras
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 
 app = Flask(__name__)
 
@@ -9,8 +10,8 @@ def get_db_connection():
     return conn
 
 
-@app.route('/data')
-def api():
+@app.route('/api/users')
+def users_api():
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('SELECT * FROM users;')
@@ -18,6 +19,28 @@ def api():
     cur.close()
     conn.close()
     return users
+
+@app.route('/api/plants')
+def plant_api():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=extras.DictCursor)
+    cur.execute('SELECT * FROM plants;')
+    plants = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    plant_list = []
+    for plant in plants:
+        plant_dict = {
+            "name": plant["common_name"],
+            "scientific_name": plant["scientific_name"],
+            "family": plant["family"],
+            "description": plant["description"],
+            "care_instructions": plant["care_instructions"]
+        }
+        plant_list.append(plant_dict)
+
+    return jsonify(plant_list)
 
 
 @app.route('/')

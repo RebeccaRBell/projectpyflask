@@ -1,0 +1,10 @@
+.outer-container {
+    display: grid;
+    grid-template-columns:auto;
+}
+
+.container {
+    border: solid black 3px;
+    padding: 10px;
+    margin: 10px;
+}

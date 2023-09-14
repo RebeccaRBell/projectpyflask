@@ -1,16 +1,14 @@
-// Importing modules
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import UserObj from "./components/UserObj";
 
 function App() {
-	// usestate for setting a javascript
-	// object for storing and using data
-	const [users, setusers] = useState();
+	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
-		fetch("/data").then((res) =>
+		fetch("/api/users").then((res) =>
 			res.json().then((users) => {
-				setusers(users);
+				setUsers(users);
 			})
 		);
 	}, []);
@@ -18,8 +16,14 @@ function App() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h1>React and flask</h1>
-				<p>User Data: {users}</p>
+				<h1>React and Flask</h1>
+				<ul>
+					{users.map((user, index) => (
+						<div key={index}>
+							<UserObj user={user} />
+						</div>
+					))}
+				</ul>
 			</header>
 		</div>
 	);
