@@ -13,16 +13,11 @@ def get_db_connection():
 def api():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM users FETCH FIRST 1 ROWS ONLY;')
+    cur.execute('SELECT * FROM users;')
     users = cur.fetchall()
     cur.close()
     conn.close()
-    return {
-        'id':users[0][0],
-        "title":users[0][1],
-        "firstname":users[0][2],
-        "lastname":users[0][3]
-        }
+    return users
 
 
 @app.route('/')
